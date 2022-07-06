@@ -1,19 +1,29 @@
-public class BinaryTreeMap<K extends Comparable<K>, V> {
+import java.util.Map;
+import java.util.Set;
 
-    private Node root;
+public class BinaryTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
+
+    private Node<K, V> root;
     private int numberOfNodes = 0;
     private ValuesLinkedList valuesList = new ValuesLinkedList();
 
-    boolean isEmpty() {
+    public boolean isEmpty() {
         return numberOfNodes == 0;
     }
 
-    int size() {
+    public int size() {
         return numberOfNodes;
     }
 
-    void put(K key, V value) {
-        var newNode = new Node();
+    /**
+     * keyとvalueのペアを追加する。
+     * @param key Comparableのみ許容
+     * @param value
+     * @return 追加されたkeyに格納されていたvalueを返す。呼び出し時点でkeyがなければnull、あれば対応するvalueを返す
+     */
+    @Override
+    public V put(K key, V value) {
+        var newNode = new Node<K, V>();
         newNode.key = key;
         newNode.value = value;
 
@@ -21,16 +31,22 @@ public class BinaryTreeMap<K extends Comparable<K>, V> {
             root = newNode;
             numberOfNodes++;
             valuesList.addNewValue(value);
-            return;
+            return null;
         }
 
+        // 現時点で走査中のノードを格納する
         var fetchedNode = root;
         while (true) {
+            // 既に同じキーが存在している場合はvalueを更新する
             if (key.compareTo(fetchedNode.key) == 0) {
-                fetchedNode.value = newNode.value;
-                return;
+                try {
+                    return fetchedNode.value;
+                } finally {
+                    fetchedNode.value = newNode.value;
+                }
 
             } else if (key.compareTo(fetchedNode.key) < 0) {
+                // 空いているノードに辿り着いた時点で格納
                 if (fetchedNode.left == null) {
                     fetchedNode.left = newNode;
                     break;
@@ -38,6 +54,7 @@ public class BinaryTreeMap<K extends Comparable<K>, V> {
                 fetchedNode = fetchedNode.left;
 
             } else if (key.compareTo(fetchedNode.key) > 0) {
+                // 空いているノードに辿り着いた時点で格納
                 if (fetchedNode.right == null) {
                     fetchedNode.right = newNode;
                     break;
@@ -48,66 +65,127 @@ public class BinaryTreeMap<K extends Comparable<K>, V> {
 
         numberOfNodes++;
         valuesList.addNewValue(value);
+        return null;
     }
 
-    V get(K key) {
+    /**
+     * 指定したkeyでvalueを取得する。
+     * @param key Comparableのみ許容
+     * @return 指定したkeyの要素がなければnull、あればvalueを返す
+     */
+    public V get(K key) {
         if (root == null) {
             return null;
         }
 
+        // 現時点で走査中のノードを格納する
         var fetchedNode = root;
         while (true) {
+            // キーを発見した場合はそのvalueを返す
             if (key.compareTo(fetchedNode.key) == 0) {
                 return fetchedNode.value;
 
             } else if (key.compareTo(fetchedNode.key) < 0) {
                 if (fetchedNode.left == null) {
-                    break;
+                    break; // 該当するキーが存在しない
                 }
                 fetchedNode = fetchedNode.left;
 
             } else if (key.compareTo(fetchedNode.key) > 0) {
                 if (fetchedNode.right == null) {
-                    break;
+                    break; // 該当するキーが存在しない
                 }
                 fetchedNode = fetchedNode.right;
             }
         }
-        return null;
+        return null; // キーがない場合はnullを返す
     }
 
-    ValuesLinkedList values() {
+    /**
+     * valueのみを格納したLinkedListを返す。LinkedListに対する変更はBinaryTreeMapにも反映される。
+     * ただremoveが面倒くさいので現状はaddにしか対応していない。
+     * @return valueを格納したLinkedList
+     */
+    public ValuesLinkedList values() {
         return valuesList;
     }
 
-    private class Node {
+    private static class Node<K extends Comparable<K>, V> {
         K key;
         V value;
-        Node left;
-        Node right;
+        Node<K, V> left;
+        Node<K, V> right;
     }
 
     public class ValuesLinkedList extends LinkedList<V> {
-        // 外部からaddされたくない（同期が大変）のでaddをprivateにした別のメソッドに格納しておく
+        /**
+         * mapとの同期が大変なのでaddをprivateにして外部から呼び出せないようにする。
+         * @param value
+         */
         private void addNewValue(V value) {
             super.add(value);
         }
 
-        // 外部から要素を追加する場合はこれを利用する
-        void add(K key, V value) {
+        /**
+         * 外部からListに値を追加する場合はこのメソッドを利用する。
+         * mapにも同時に値が追加され、中身が同期されるようになっている。
+         * @param key mapに追加するkey
+         * @param value 
+         * @return 変更があった場合はtrueが返る（毎回trueが返る）
+         */
+        public boolean add(K key, V value) {
             put(key, value);
+            return true;
         }
 
-        // キーを自動生成してmapと同期させるのが大変なので例外を投げる
+        // addは呼び出されたくないので例外を投げるようにしておく
         @Override
-        void add(V newElement) {
+        public boolean add(V newElement) {
             throw new UnsupportedOperationException();
         }
 
         // map本体にremoveを実装していないので例外を投げる
         @Override
-        void remove() {
+        public V remove(int i) {
             throw new UnsupportedOperationException();
         }
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+        return false;
+    }
+
+    @Override
+    public boolean containsValue(Object value) {
+        return false;
+    }
+
+    @Override
+    public V remove(Object key) {
+        return null;
+    }
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> m) {
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    @Override
+    public Set<K> keySet() {
+        return null;
+    }
+
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+        return null;
+    }
+
+    @Override
+    public V get(Object key) {
+        return null;
     }
 }
