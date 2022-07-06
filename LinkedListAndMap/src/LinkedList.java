@@ -10,7 +10,7 @@ public class LinkedList<E> {
     }
 
     int size() {
-        return this.length;
+        return length;
     }
 
     void add(E newElement) {
@@ -84,6 +84,8 @@ public class LinkedList<E> {
     class Iterator {
         private Node currentNode = firstNode;
         private int iteration = 0;
+
+        private Iterator() {};
 
         boolean hasNext() {
             return iteration < length;

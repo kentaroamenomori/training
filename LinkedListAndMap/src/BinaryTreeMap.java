@@ -2,7 +2,7 @@ public class BinaryTreeMap<K extends Comparable<K>, V> {
 
     private Node root;
     private int numberOfNodes = 0;
-    private LinkedList<V> valuesList = new LinkedList<>();
+    private ValuesLinkedList valuesList = new ValuesLinkedList();
 
     boolean isEmpty() {
         return numberOfNodes == 0;
@@ -13,41 +13,41 @@ public class BinaryTreeMap<K extends Comparable<K>, V> {
     }
 
     void put(K key, V value) {
-        valuesList.add(value);
+        var newNode = new Node();
+        newNode.key = key;
+        newNode.value = value;
 
         if (root == null) {
-            root = new Node();
-            root.key = key;
-            root.value = value;
+            root = newNode;
+            numberOfNodes++;
+            valuesList.addNewValue(value);
             return;
         }
 
-        var addedNode = new Node();
-        addedNode.key = key;
-        addedNode.value = value;
-
-        var parent = root;
+        var fetchedNode = root;
         while (true) {
-            if (key == parent.key) {
-                parent.value = addedNode.value;
+            if (key.compareTo(fetchedNode.key) == 0) {
+                fetchedNode.value = newNode.value;
                 return;
-            }
 
-            if (key.compareTo(parent.key) < 0) {
-                if (parent.left == null) {
-                    parent.left = addedNode;
+            } else if (key.compareTo(fetchedNode.key) < 0) {
+                if (fetchedNode.left == null) {
+                    fetchedNode.left = newNode;
                     break;
                 }
-                parent = parent.left;
-            } else {
-                if (parent.right == null) {
-                    parent.right = addedNode;
+                fetchedNode = fetchedNode.left;
+
+            } else if (key.compareTo(fetchedNode.key) > 0) {
+                if (fetchedNode.right == null) {
+                    fetchedNode.right = newNode;
                     break;
                 }
-                parent = parent.right;
+                fetchedNode = fetchedNode.right;
             }
         }
+
         numberOfNodes++;
+        valuesList.addNewValue(value);
     }
 
     V get(K key) {
@@ -55,36 +55,59 @@ public class BinaryTreeMap<K extends Comparable<K>, V> {
             return null;
         }
 
-        var parent = root;
+        var fetchedNode = root;
         while (true) {
-            if (key == parent.key) {
-                return parent.value;
-            }
+            if (key.compareTo(fetchedNode.key) == 0) {
+                return fetchedNode.value;
 
-            if (key.compareTo(parent.key) < 0) {
-                if (parent.left == null) {
+            } else if (key.compareTo(fetchedNode.key) < 0) {
+                if (fetchedNode.left == null) {
                     break;
                 }
-                parent = parent.left;
-            } else {
-                if (parent.right == null) {
+                fetchedNode = fetchedNode.left;
+
+            } else if (key.compareTo(fetchedNode.key) > 0) {
+                if (fetchedNode.right == null) {
                     break;
                 }
-                parent = parent.right;
+                fetchedNode = fetchedNode.right;
             }
         }
         return null;
     }
 
-     // abstract collection
-    LinkedList<V> values() {
+    ValuesLinkedList values() {
         return valuesList;
     }
 
     private class Node {
-        private K key;
-        private V value;
-        private Node left;
-        private Node right;
+        K key;
+        V value;
+        Node left;
+        Node right;
+    }
+
+    public class ValuesLinkedList extends LinkedList<V> {
+        // 外部からaddされたくない（同期が大変）のでaddをprivateにした別のメソッドに格納しておく
+        private void addNewValue(V value) {
+            super.add(value);
+        }
+
+        // 外部から要素を追加する場合はこれを利用する
+        void add(K key, V value) {
+            put(key, value);
+        }
+
+        // キーを自動生成してmapと同期させるのが大変なので例外を投げる
+        @Override
+        void add(V newElement) {
+            throw new UnsupportedOperationException();
+        }
+
+        // map本体にremoveを実装していないので例外を投げる
+        @Override
+        void remove() {
+            throw new UnsupportedOperationException();
+        }
     }
 }

@@ -16,12 +16,22 @@ public class App {
         newMap.put("two", "third");
         newMap.put("two", "not third");
 
-        var value = newMap.get("zero");
-        var value2 = newMap.get("one");
-        var value3 = newMap.get("three");
+        // var value = newMap.get("zero");
+        // var value2 = newMap.get("one");
+        // var value3 = newMap.get("three");
+        // System.out.println(value);
+        // System.out.println(value2);
+        // System.out.println(value3);
+
+        var values = newMap.values();
+        // values.add("key", "value");
+
+        var count = values.size();
+        System.out.println(count);
+
+        var value = newMap.get("key");
         System.out.println(value);
-        System.out.println(value2);
-        System.out.println(value3);
+        
 
         // String str = newList.get(1);
         // System.out.println(str);
