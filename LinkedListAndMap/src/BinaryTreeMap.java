@@ -17,15 +17,13 @@ public class BinaryTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     /**
      * keyとvalueのペアを追加する。
-     * @param key Comparableのみ許容
+     * @param key
      * @param value
      * @return 追加されたkeyに格納されていたvalueを返す。呼び出し時点でkeyがなければnull、あれば対応するvalueを返す
      */
     @Override
     public V put(K key, V value) {
-        var newNode = new Node<K, V>();
-        newNode.key = key;
-        newNode.value = value;
+        var newNode = new Node<K, V>(key, value);
 
         if (root == null) {
             root = newNode;
@@ -39,11 +37,9 @@ public class BinaryTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
         while (true) {
             // 既に同じキーが存在している場合はvalueを更新する
             if (key.compareTo(fetchedNode.key) == 0) {
-                try {
-                    return fetchedNode.value;
-                } finally {
-                    fetchedNode.value = newNode.value;
-                }
+                var oldValue = fetchedNode.value;
+                fetchedNode.value = newNode.value;
+                return oldValue;
 
             } else if (key.compareTo(fetchedNode.key) < 0) {
                 // 空いているノードに辿り着いた時点で格納
@@ -70,7 +66,7 @@ public class BinaryTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
 
     /**
      * 指定したkeyでvalueを取得する。
-     * @param key Comparableのみ許容
+     * @param key
      * @return 指定したkeyの要素がなければnull、あればvalueを返す
      */
     public V get(K key) {
@@ -102,8 +98,8 @@ public class BinaryTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     /**
-     * valueのみを格納したLinkedListを返す。LinkedListに対する変更はBinaryTreeMapにも反映される。
-     * ただremoveが面倒くさいので現状はaddにしか対応していない。
+     * valueのみを格納したLinkedListを返す。mapへの要素追加はListに反映される。
+     * List側からの中身の変更は不可。
      * @return valueを格納したLinkedList
      */
     public ValuesLinkedList values() {
@@ -111,40 +107,28 @@ public class BinaryTreeMap<K extends Comparable<K>, V> implements Map<K, V> {
     }
 
     private static class Node<K extends Comparable<K>, V> {
-        K key;
+        final K key;
         V value;
         Node<K, V> left;
         Node<K, V> right;
+
+        Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 
     public class ValuesLinkedList extends LinkedList<V> {
-        /**
-         * mapとの同期が大変なのでaddをprivateにして外部から呼び出せないようにする。
-         * @param value
-         */
+        // mapとの同期が大変なのでaddをprivateにして外部から呼び出せないようにする。
         private void addNewValue(V value) {
             super.add(value);
         }
 
-        /**
-         * 外部からListに値を追加する場合はこのメソッドを利用する。
-         * mapにも同時に値が追加され、中身が同期されるようになっている。
-         * @param key mapに追加するkey
-         * @param value 
-         * @return 変更があった場合はtrueが返る（毎回trueが返る）
-         */
-        public boolean add(K key, V value) {
-            put(key, value);
-            return true;
-        }
-
-        // addは呼び出されたくないので例外を投げるようにしておく
         @Override
         public boolean add(V newElement) {
             throw new UnsupportedOperationException();
         }
 
-        // map本体にremoveを実装していないので例外を投げる
         @Override
         public V remove(int i) {
             throw new UnsupportedOperationException();

@@ -6,23 +6,23 @@ public class App {
         newList.add("second");
         newList.add("third");
         newList.add("forth");
-        newList.remove();
-        newList.remove();
+        newList.remove(2);
+        newList.remove(1);
         newList.add("first");
 
-        final BinaryTreeMap<String, String> newMap = new BinaryTreeMap<>();
-        newMap.put("one", "first");
-        newMap.put("zero", "second");
-        newMap.put("two", "third");
-        var value4 = newMap.put("two", "not third");
+        // final BinaryTreeMap<String, String> newMap = new BinaryTreeMap<>();
+        // newMap.put("one", "first");
+        // newMap.put("zero", "second");
+        // newMap.put("two", "third");
+        // var value4 = newMap.put("two", "not third");
 
-        var value = newMap.get("zero");
-        var value2 = newMap.get("one");
-        var value3 = newMap.get("two");
-        System.out.println(value);
-        System.out.println(value2);
-        System.out.println(value3);
-        System.out.println(value4);
+        // var value = newMap.get("zero");
+        // var value2 = newMap.get("one");
+        // var value3 = newMap.get("two");
+        // System.out.println(value);
+        // System.out.println(value2);
+        // System.out.println(value3);
+        // System.out.println(value4);
 
         // var values = newMap.values();
         // values.add("key", "value");

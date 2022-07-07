@@ -3,6 +3,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
 public class LinkedList<E> implements List<E> {
 
@@ -18,8 +19,8 @@ public class LinkedList<E> implements List<E> {
     }
 
     /**
-     * 指定した要素を末尾に追加する
-     * @param e 指定する要素
+     * 指定した要素を末尾に追加する。
+     * @param e
      * @return 常にtrue（Listインターフェース的には変更があった場合にtrueを返す仕様っぽい）
      */
     @Override
@@ -51,9 +52,8 @@ public class LinkedList<E> implements List<E> {
     /**
      * 指定したインデックスの要素を取得する。インデックスが
      * Listの範囲を超えている場合は例外を投げる。
-     * インデックスが小さい場合は前から、大きい場合は後ろから走査する。
-     * @param i インデックス
-     * @return インデックスにある要素
+     * @param i 
+     * @return インデックスに該当する要素
      */
     @Override
     public E get(int i) {
@@ -82,31 +82,58 @@ public class LinkedList<E> implements List<E> {
     }
 
     /**
-     * 最初の要素を削除する。
-     * @return 変更があった場合はtrue、なかった場合（呼び出し時点で要素が0個）はfalseを返す
+     * インデックスで指定した要素を削除する。
+     * @param index 
+     * @return 削除された要素
      */
-    public boolean remove() {
+    @Override
+    public E remove(final int index) {
         if (length == 0) {
-            return false;
+            return null;
+        } else if (length == 1) {
+            var previousElement = firstNode.element;
+            firstNode = null;
+            return previousElement;
+        }
+
+        if (index >= length || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        // 走査中のノードを格納
+        var fetchedNode = firstNode;
+        // 走査用のインデックス
+        int i = index;
+        // iが小さい場合は通常の順序で走査
+        if (i < length / 2) {
+            while (i > 0) {
+                i--;
+                fetchedNode = fetchedNode.next;
+            }
+
+        // iが大きい場合は逆順に走査
+        } else {
+            i = length - i;
+            while (i > 0) {
+                i--;
+                fetchedNode = fetchedNode.previous;
+            }
+        }
+
+        var previousNode = fetchedNode.previous;
+        var nextNode = fetchedNode.next;
+
+        previousNode.next = nextNode;
+        nextNode.previous = previousNode;
+
+        // firstNodeが削除された場合
+        if (index == 0) {
+            firstNode = nextNode;
         }
 
         length--;
-        if (length == 0) {
-            firstNode = null;
-            return true;
-        }
 
-        // 循環リスト
-        // firstNodeをnewFirstNode(firstNode.next)に差し替える
-        // lastNode.nextの参照先もnewFirstNodeに差し替える
-        var newFirstNode = firstNode.next;
-        var lastNode = firstNode.previous;
-        
-        lastNode.next = newFirstNode;
-        newFirstNode.previous = lastNode;
-
-        this.firstNode = newFirstNode;
-        return true;
+        return fetchedNode.element;
     }
 
     @Override
@@ -126,10 +153,12 @@ public class LinkedList<E> implements List<E> {
 
         private LinkedListIterator() {};
 
+        @Override
         public boolean hasNext() {
             return iteration < length;
         }
 
+        @Override
         public E next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
@@ -141,6 +170,16 @@ public class LinkedList<E> implements List<E> {
             var oldCurrentNode = currentNode;
             this.currentNode = currentNode.next;
             return oldCurrentNode.element;
+        }
+
+        @Override
+        public void remove() {
+            Iterator.super.remove();
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super E> action) {
+            Iterator.super.forEachRemaining(action);
         }
     }
 
@@ -196,11 +235,6 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public void add(int index, Object element) {
-    }
-
-    @Override
-    public E remove(int index) {
-        return null;
     }
 
     @Override
