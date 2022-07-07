@@ -8,6 +8,7 @@ public class Controller {
     final WorldClock worldClock = new WorldClock();
     final Calc calc = new Calc();
     final BoldKeyword boldKeyword = new BoldKeyword();
+    final InspectClass inspectClass = new InspectClass();
     /**
      * 入力コマンドに応じて動作を変更する。qでシステムごと終了する。
      * @param str 入力文字列
@@ -41,6 +42,8 @@ public class Controller {
                 return calc.calculate(input);
             case BoldKeyword.command:
                 return boldKeyword.bolden(input);
+            case InspectClass.command:
+                return inspectClass.inspect(input);
             default:
                 return "invalid command";
         }
