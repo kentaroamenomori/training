@@ -16,7 +16,7 @@ public class WorldClock implements ModelInterface {
      */
     @Override
     public String execute(String placeCode) {
-        placeCode = placeCode.replaceAll("\\s+", "");
+        placeCode = placeCode.trim();
         
         String timezone = "GMT";
         switch (placeCode) {

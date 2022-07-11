@@ -13,8 +13,6 @@ public class Calc implements ModelInterface {
      */
     @Override
     public String execute(String input) {
-        input = input.replaceAll("\\s+", "");
-        
         int index;
         SplitStringIntoBigDecimals numbers;
         BigDecimal result;
@@ -62,8 +60,8 @@ public class Calc implements ModelInterface {
          */
         SplitStringIntoBigDecimals(String str, int index) throws NumberFormatException {
             try {
-                firstNumber = new BigDecimal(str.substring(0, index));
-                secondNumber = new BigDecimal(str.substring(index + 1));
+                firstNumber = new BigDecimal(str.substring(0, index).trim());
+                secondNumber = new BigDecimal(str.substring(index + 1).trim());
             } catch (NumberFormatException e) {
                 throw e;
             }

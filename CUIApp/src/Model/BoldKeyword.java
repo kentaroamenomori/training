@@ -23,8 +23,8 @@ public class BoldKeyword implements ModelInterface {
             return "keyword not specified";
         }
 
-        String filePath = input.substring(0, spaceIndex);
-        String keyword = input.substring(spaceIndex + 1);
+        String filePath = input.substring(0, spaceIndex).trim();
+        String keyword = input.substring(spaceIndex + 1).trim();
 
         Path path = Path.of(filePath);
 
