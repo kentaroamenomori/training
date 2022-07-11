@@ -39,7 +39,7 @@ public class Calc implements ModelInterface {
                 result = numbers.divide();
 
             } else {
-                return "opperator is not specified";
+                return "operator is not specified";
             }
         } catch (NumberFormatException e) {
             return "not numbers";
