@@ -10,16 +10,11 @@ public class Controller {
     final BoldKeyword boldKeyword = new BoldKeyword();
     final InspectClass inspectClass = new InspectClass();
     /**
-     * 入力コマンドに応じて動作を変更する。qでシステムごと終了する。
+     * 入力コマンドに応じて動作を変更する。qでnullを返す。
      * @param str 入力文字列
      * @return ターミナルに出力する文字列
      */
-    public String controll(String str) {
-        // qで終了
-        if (str.equals("q")) {
-            System.exit(0);
-        }
-
+    public String control(String str) {
         int spaceIndex = str.indexOf(" ");
 
         String command; // スペース以前をコマンドとして格納
@@ -44,6 +39,8 @@ public class Controller {
                 return boldKeyword.bolden(input);
             case InspectClass.command:
                 return inspectClass.inspect(input);
+            case "q":
+                return null;
             default:
                 return "invalid command";
         }

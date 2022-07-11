@@ -7,7 +7,10 @@ public class App {
 
         while (true) {
             String input = console.readLine();
-            String result = controller.controll(input);
+            String result = controller.control(input);
+            if (result == null) {
+                System.exit(0);
+            }
             System.out.println(result);
         }
     }
