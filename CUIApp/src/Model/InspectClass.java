@@ -48,7 +48,7 @@ public class InspectClass implements ModelInterface {
                     var value = " = " + field.get(instance).toString();
                     fieldResult += value;
                 } catch (IllegalAccessException e) {
-                    // e.printStackTrace();
+                    e.printStackTrace();
                 }
                 fieldResult += "\n";
             }
