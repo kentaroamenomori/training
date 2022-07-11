@@ -7,8 +7,8 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BoldKeyword {
-    public static final String command = "boldkeyword";
+public class BoldKeyword implements ModelInterface {
+    public static final String COMMAND = "boldkeyword";
     /**
      * 指定ファイルの指定キーワードを<b> </b>で囲ったファイルを指定ファイルと同じディレクトリに出力する。
      * キーワードが複数行にまたがっている場合は認識しない。
@@ -16,7 +16,8 @@ public class BoldKeyword {
      * @param input ファイルのパスとキーワードを含んだ文字列。間に空白がない場合はエラー文を返す。ファイルは絶対パスで指定する。
      * @return 成功・エラー内容を記載した文字列。成功した場合はファイルのパスも返す。
      */
-    public String bolden(String input) {
+    @Override
+    public String execute(String input) {
         int spaceIndex = input.indexOf(" ");
         if (spaceIndex == -1) {
             return "keyword not specified";

@@ -3,7 +3,6 @@ package Controller;
 import Model.*;
 
 public class Controller {
-    // TODO: インスタンスする？staticにする？
     final StarEcho starEcho = new StarEcho();
     final WorldClock worldClock = new WorldClock();
     final Calc calc = new Calc();
@@ -29,16 +28,16 @@ public class Controller {
         }
 
         switch (command) {
-            case StarEcho.command:
-                return starEcho.addStars(input);
-            case WorldClock.command:
-                return worldClock.fetchTimeOf(input);
-            case Calc.command:
-                return calc.calculate(input);
-            case BoldKeyword.command:
-                return boldKeyword.bolden(input);
-            case InspectClass.command:
-                return inspectClass.inspect(input);
+            case StarEcho.COMMAND:
+                return starEcho.execute(input);
+            case WorldClock.COMMAND:
+                return worldClock.execute(input);
+            case Calc.COMMAND:
+                return calc.execute(input);
+            case BoldKeyword.COMMAND:
+                return boldKeyword.execute(input);
+            case InspectClass.COMMAND:
+                return inspectClass.execute(input);
             case "q":
                 return null;
             default:

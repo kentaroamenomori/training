@@ -1,9 +1,10 @@
 package Model;
 
-public class StarEcho {
-    public static final String command = "starecho";
+public class StarEcho implements ModelInterface {
+    public static final String COMMAND = "starecho";
 
-    public String addStars(String input) {
+    @Override
+    public String execute(String input) {
         return "*" + input + "*";
     }
 }

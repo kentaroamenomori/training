@@ -3,15 +3,16 @@ package Model;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
-public class Calc {
-    public static final String command = "calc";
+public class Calc implements ModelInterface {
+    public static final String COMMAND = "calc";
     /**
      * 入力値から四則演算の演算子を検出し、その前後の数字の演算結果を返す。
      * 三つ以上の数値の演算はできない。
      * @param input 数値、演算子、数値の順で並んだ文字列。
      * @return 計算結果を文字列として返す。数値がない・複数の演算子があるなどの場合はエラー文を返す。
      */
-    public String calculate(String input) {
+    @Override
+    public String execute(String input) {
         input = input.replaceAll("\\s+", "");
         
         int index;

@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class WorldClock {
-    public static final String command = "worldclock";
-    private final SimpleDateFormat gmtDateFormat 
+public class WorldClock implements ModelInterface {
+    public static final String COMMAND = "worldclock";
+    private static final SimpleDateFormat GMT_DATE_FORMAT 
             = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     /**
@@ -14,7 +14,8 @@ public class WorldClock {
      * @param placeCode TOKYO, NY, SF, LONDON, SINGAPORE, MOSCOW, 空白のいずれかを指定。
      * @return 指定した場所の時刻。指定がなければGMT。存在しないコードを指定した場合はエラー文を返す。
      */
-    public String fetchTimeOf(String placeCode) {
+    @Override
+    public String execute(String placeCode) {
         placeCode = placeCode.replaceAll("\\s+", "");
         
         String timezone = "GMT";
@@ -44,7 +45,7 @@ public class WorldClock {
                 return "invalid place code";
         }
         
-        gmtDateFormat.setTimeZone(TimeZone.getTimeZone(timezone));
-        return gmtDateFormat.format(new Date());
+        GMT_DATE_FORMAT.setTimeZone(TimeZone.getTimeZone(timezone));
+        return GMT_DATE_FORMAT.format(new Date());
     }
 }
