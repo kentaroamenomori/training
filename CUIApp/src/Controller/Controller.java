@@ -21,7 +21,7 @@ public class Controller {
         String command; // スペース以前をコマンドとして格納
         String input; // スペース以降を入力内容として格納
 
-        if (spaceIndex == -1) {
+        if (spaceIndex == -1 || spaceIndex >= str.length()) {
             command = str;
             input = "";
         } else {
