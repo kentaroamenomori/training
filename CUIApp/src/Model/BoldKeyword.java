@@ -53,7 +53,8 @@ public class BoldKeyword implements ModelInterface {
 
         // 新しいファイルのパスを生成
         String fileName = path.getFileName().toString();
-        String newFileName = fileName.replaceFirst("[.][^.]+$", "") + ".bold";
+        int dotIndex = fileName.lastIndexOf(".");
+        String newFileName = fileName.substring(0, dotIndex) + ".bold";
 
         String fileDirectory = path.getParent().toString();
 
