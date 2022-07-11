@@ -2,15 +2,16 @@ package Model;
 
 import java.util.Arrays;
 
-public class InspectClass {
-    public static final String command = "inspectclass";
+public class InspectClass implements ModelInterface {
+    public static final String COMMAND = "inspectclass";
     /**
      * 指定したクラス、および先祖クラスのフィールド・メソッドを一覧で出力する。public・privateなど関係なく全ての修飾子のフィールドが出力される。
      * なお出力されるクラスはデフォルトコンストラクタを持つ具象クラスのみに限定される。
      * @param input クラスを完全名で指定する。
      * @return フィールド・メソッド一覧もしくはエラー文を返す。
      */
-    public String inspect(String input) {
+    @Override
+    public String execute(String input) {
         Class<?> clazz;
         try {
             clazz = Class.forName(input);
@@ -21,43 +22,47 @@ public class InspectClass {
             return "class not found";
         }
 
-        var fieldList = Arrays.asList(clazz.getDeclaredFields());
-        var methodList = Arrays.asList(clazz.getDeclaredMethods());
-
+        var fieldResult = "fields:\n";
+        var methodResult = "methods:\n";
         while (true) {
-            clazz = clazz.getSuperclass();
-
-            // デフォルトコンストラクタがない場合はループを抜ける
+            // clazzのインスタンスを用意する
+            Object instance;
             try {
-                clazz.getConstructor();
+                instance = clazz.getDeclaredConstructor().newInstance();
             } catch (Exception e) {
+                // デフォルトコンストラクタをもたないクラスの場合はループを抜ける
+                e.printStackTrace();
                 break;
             }
-            fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
-            methodList.addAll(Arrays.asList(clazz.getDeclaredMethods()));
+
+            var fields = Arrays.asList(clazz.getDeclaredFields());
+            var methods = Arrays.asList(clazz.getDeclaredMethods());
+
+            // fields
+            for (var field : fields) {
+                fieldResult += field.toString();
+                try {
+                    field.setAccessible(true);
+    
+                    // fieldの初期値を取得する
+                    var value = " = " + field.get(instance).toString();
+                    fieldResult += value;
+                } catch (IllegalAccessException e) {
+                    // e.printStackTrace();
+                }
+                fieldResult += "\n";
+            }
+
+            // methods
+            for (var method : methods) {
+                methodResult += method.toString();
+                methodResult += "\n";
+            }
+
+            // 親クラスの走査の用意
+            clazz = clazz.getSuperclass();
         }
         
-        // field
-        var result = "fields:\n";
-        for (var field : fieldList) {
-            result += field.toString();
-            try {
-                field.setAccessible(true);
-
-                // fieldの初期値を取得する
-                var value = " = " + field.get(field).toString();
-                result += value;
-            } catch (Exception e) {}
-            result += "\n";
-        }
-
-        // method
-        result += "\nmethods:\n";
-        for (var method : methodList) {
-            result += method.toString();
-            result += "\n";
-        }
-
-        return result;
+        return fieldResult + "\n" + methodResult;
     }
 }
