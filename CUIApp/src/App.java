@@ -7,11 +7,10 @@ public class App {
 
         while (true) {
             String input = console.readLine();
-            String result = controller.control(input);
-            if (result == null) {
-                System.exit(0);
-            }
-            System.out.println(result);
+            var result = controller.control(input);
+            result.ifPresentOrElse(
+                System.out::println, 
+                () -> System.exit(0));
         }
     }
 }

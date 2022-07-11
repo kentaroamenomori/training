@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.Optional;
+
 import Model.*;
 
 public class Controller {
@@ -13,7 +15,7 @@ public class Controller {
      * @param str 入力文字列
      * @return ターミナルに出力する文字列
      */
-    public String control(String str) {
+    public Optional<String> control(String str) {
         int spaceIndex = str.indexOf(" ");
 
         String command; // スペース以前をコマンドとして格納
@@ -27,21 +29,31 @@ public class Controller {
             input = str.substring(spaceIndex + 1);
         }
 
+        String result;
+
         switch (command) {
             case StarEcho.COMMAND:
-                return starEcho.execute(input);
+                result = starEcho.execute(input);
+                break;
             case WorldClock.COMMAND:
-                return worldClock.execute(input);
+                result = worldClock.execute(input);
+                break;
             case Calc.COMMAND:
-                return calc.execute(input);
+                result = calc.execute(input);
+                break;
             case BoldKeyword.COMMAND:
-                return boldKeyword.execute(input);
+                result = boldKeyword.execute(input);
+                break;
             case InspectClass.COMMAND:
-                return inspectClass.execute(input);
+                result = inspectClass.execute(input);
+                break;
             case "q":
-                return null;
+                result = null;
+                break;
             default:
-                return "invalid command";
+                result = "invalid command";
         }
+
+        return Optional.ofNullable(result);
     }
 }
