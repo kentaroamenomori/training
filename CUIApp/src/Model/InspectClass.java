@@ -33,14 +33,6 @@ public class InspectClass implements ModelInterface {
         var fieldResult = "fields:\n";
         var methodResult = "methods:\n";
         while (clazz != null) {
-            // クラスがデフォルトコンストラクタをもたない場合は処理をスキップ
-            try {
-                clazz.getConstructor();
-            } catch (NoSuchMethodException e) {
-                clazz = clazz.getSuperclass();
-                continue;
-            }
-
             var fields = Arrays.asList(clazz.getDeclaredFields());
             var methods = Arrays.asList(clazz.getDeclaredMethods());
 
