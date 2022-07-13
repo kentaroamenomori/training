@@ -1,6 +1,3 @@
--- 従業員テーブルに部署IDをカラムを追加
-ALTER TABLE employees ADD COLUMN division_id text;
-
 -- 部署IDが01の部署の従業員を取得（INNER JOINなし）
 SELECT divisions.id, employees.name 
 	FROM divisions, employees 
@@ -10,4 +7,4 @@ SELECT divisions.id, employees.name
 SELECT divisions.name, employees.name 
 	FROM divisions 
 		INNER JOIN employees ON divisions.id = employees.division_id
-		WHERE divisions.id = '01';
+	WHERE divisions.id = '01';
