@@ -1,0 +1,100 @@
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+13-Jul-2022 19:08:04.467 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log Serverのバージョン名:     Apache Tomcat/10.0.22
+13-Jul-2022 19:08:04.469 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log Server ビルド:            Jun 2 2022 16:53:56 UTC
+13-Jul-2022 19:08:04.469 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log サーバーのバージョン番号: 10.0.22.0
+13-Jul-2022 19:08:04.469 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log OS 名:                    Mac OS X
+13-Jul-2022 19:08:04.469 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log OS バージョン:            12.4
+13-Jul-2022 19:08:04.470 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log アーキテクチャ:           aarch64
+13-Jul-2022 19:08:04.470 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:                /Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home
+13-Jul-2022 19:08:04.470 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM バージョン:           18.0.1+10
+13-Jul-2022 19:08:04.470 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM ベンダ:               Eclipse Adoptium
+13-Jul-2022 19:08:04.470 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:            /Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22
+13-Jul-2022 19:08:04.470 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:            /Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22
+13-Jul-2022 19:08:04.476 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.lang=ALL-UNNAMED
+13-Jul-2022 19:08:04.476 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.io=ALL-UNNAMED
+13-Jul-2022 19:08:04.476 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.util=ALL-UNNAMED
+13-Jul-2022 19:08:04.476 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+13-Jul-2022 19:08:04.476 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.util.logging.config.file=/Users/kentaro.amenomori/documents/training/java/webapp/workspace/apache-tomcat-10.0.22/conf/logging.properties
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djdk.tls.ephemeralDHKeySize=2048
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dignore.endorsed.dirs=
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dcatalina.base=/Users/kentaro.amenomori/documents/training/java/webapp/workspace/apache-tomcat-10.0.22
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dcatalina.home=/Users/kentaro.amenomori/documents/training/java/webapp/workspace/apache-tomcat-10.0.22
+13-Jul-2022 19:08:04.477 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.io.tmpdir=/Users/kentaro.amenomori/documents/training/java/webapp/workspace/apache-tomcat-10.0.22/temp
+13-Jul-2022 19:08:04.485 情報 [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent 商用環境に最適な性能を発揮する APR ベースの Tomcat ネイティブライブラリが java.library.path [/Users/kentaro.amenomori/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.] に存在しません。
+13-Jul-2022 19:08:04.622 情報 [main] org.apache.coyote.AbstractProtocol.init プロトコルハンドラ ["http-nio-8080"] を初期化します。
+13-Jul-2022 19:08:04.633 情報 [main] org.apache.catalina.startup.Catalina.load サーバーの初期化 [248]ms
+13-Jul-2022 19:08:04.648 情報 [main] org.apache.catalina.core.StandardService.startInternal サービス [Catalina] を起動します
+13-Jul-2022 19:08:04.648 情報 [main] org.apache.catalina.core.StandardEngine.startInternal サーブレットエンジンの起動：[Apache Tomcat/10.0.22]
+13-Jul-2022 19:08:04.652 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/docs] を配備します
+13-Jul-2022 19:08:04.758 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/docs] の Web アプリケーションの配備は [104] ms で完了しました。
+13-Jul-2022 19:08:04.758 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/manager] を配備します
+13-Jul-2022 19:08:04.779 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/manager] の Web アプリケーションの配備は [21] ms で完了しました。
+13-Jul-2022 19:08:04.779 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/examples] を配備します
+13-Jul-2022 19:08:04.897 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/examples] の Web アプリケーションの配備は [118] ms で完了しました。
+13-Jul-2022 19:08:04.897 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/ROOT] を配備します
+13-Jul-2022 19:08:04.906 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/ROOT] の Web アプリケーションの配備は [9] ms で完了しました。
+13-Jul-2022 19:08:04.906 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/host-manager] を配備します
+13-Jul-2022 19:08:04.916 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/host-manager] の Web アプリケーションの配備は [10] ms で完了しました。
+13-Jul-2022 19:08:04.917 情報 [main] org.apache.coyote.AbstractProtocol.start プロトコルハンドラー ["http-nio-8080"] を開始しました。
+13-Jul-2022 19:08:04.922 情報 [main] org.apache.catalina.startup.Catalina.start サーバーの起動 [288]ms
+13-Jul-2022 23:49:16.154 情報 [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/book] を配備します
+13-Jul-2022 23:49:16.189 情報 [Catalina-utility-1] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/apache-tomcat-10.0.22/webapps/book] の Web アプリケーションの配備は [35] ms で完了しました。
+14-Jul-2022 00:01:36.317 情報 [main] org.apache.catalina.core.StandardServer.await 有効なシャットダウンコマンドがシャットダウンポート経由で受信されました。 サーバーインスタンスを停止します。
+14-Jul-2022 00:01:36.317 情報 [main] org.apache.coyote.AbstractProtocol.pause ProtocolHandler ["http-nio-8080"] を一時停止します。
+14-Jul-2022 00:01:36.332 情報 [main] org.apache.catalina.core.StandardService.stopInternal サービス [Catalina] を停止します
+14-Jul-2022 00:01:36.341 情報 [main] org.apache.coyote.AbstractProtocol.stop ProtocolHandler ["http-nio-8080"]の停止中
+14-Jul-2022 00:01:36.345 情報 [main] org.apache.coyote.AbstractProtocol.destroy ProtocolHandler ["http-nio-8080"] を破棄します。
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2022 00:03:24.781 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log Serverのバージョン名:     Apache Tomcat/10.0.22
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log Server ビルド:            Jun 2 2022 16:53:56 UTC
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log サーバーのバージョン番号: 10.0.22.0
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log OS 名:                    Mac OS X
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log OS バージョン:            12.4
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log アーキテクチャ:           aarch64
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:                /Library/Java/JavaVirtualMachines/temurin-18.jdk/Contents/Home
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM バージョン:           18.0.1+10
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log JVM ベンダ:               Eclipse Adoptium
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:            /Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat
+14-Jul-2022 00:03:24.783 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:            /Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat
+14-Jul-2022 00:03:24.789 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.lang=ALL-UNNAMED
+14-Jul-2022 00:03:24.789 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.io=ALL-UNNAMED
+14-Jul-2022 00:03:24.789 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.util=ALL-UNNAMED
+14-Jul-2022 00:03:24.789 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-Jul-2022 00:03:24.789 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-Jul-2022 00:03:24.789 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.util.logging.config.file=/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/conf/logging.properties
+14-Jul-2022 00:03:24.789 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Jul-2022 00:03:24.790 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djdk.tls.ephemeralDHKeySize=2048
+14-Jul-2022 00:03:24.790 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-Jul-2022 00:03:24.790 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-Jul-2022 00:03:24.790 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dignore.endorsed.dirs=
+14-Jul-2022 00:03:24.790 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dcatalina.base=/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat
+14-Jul-2022 00:03:24.790 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Dcatalina.home=/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat
+14-Jul-2022 00:03:24.790 情報 [main] org.apache.catalina.startup.VersionLoggerListener.log コマンドライン引数:       -Djava.io.tmpdir=/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/temp
+14-Jul-2022 00:03:24.797 情報 [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent 商用環境に最適な性能を発揮する APR ベースの Tomcat ネイティブライブラリが java.library.path [/Users/kentaro.amenomori/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.] に存在しません。
+14-Jul-2022 00:03:24.932 情報 [main] org.apache.coyote.AbstractProtocol.init プロトコルハンドラ ["http-nio-8080"] を初期化します。
+14-Jul-2022 00:03:24.945 情報 [main] org.apache.catalina.startup.Catalina.load サーバーの初期化 [244]ms
+14-Jul-2022 00:03:24.959 情報 [main] org.apache.catalina.core.StandardService.startInternal サービス [Catalina] を起動します
+14-Jul-2022 00:03:24.959 情報 [main] org.apache.catalina.core.StandardEngine.startInternal サーブレットエンジンの起動：[Apache Tomcat/10.0.22]
+14-Jul-2022 00:03:24.963 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/docs] を配備します
+14-Jul-2022 00:03:25.070 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/docs] の Web アプリケーションの配備は [106] ms で完了しました。
+14-Jul-2022 00:03:25.070 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/manager] を配備します
+14-Jul-2022 00:03:25.090 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/manager] の Web アプリケーションの配備は [20] ms で完了しました。
+14-Jul-2022 00:03:25.090 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/examples] を配備します
+14-Jul-2022 00:03:25.204 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/examples] の Web アプリケーションの配備は [114] ms で完了しました。
+14-Jul-2022 00:03:25.204 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/book] を配備します
+14-Jul-2022 00:03:25.215 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/book] の Web アプリケーションの配備は [11] ms で完了しました。
+14-Jul-2022 00:03:25.215 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/ROOT] を配備します
+14-Jul-2022 00:03:25.223 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/ROOT] の Web アプリケーションの配備は [8] ms で完了しました。
+14-Jul-2022 00:03:25.223 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory Webアプリケーションディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/host-manager] を配備します
+14-Jul-2022 00:03:25.232 情報 [main] org.apache.catalina.startup.HostConfig.deployDirectory ディレクトリ [/Users/kentaro.amenomori/Documents/training/java/webapp/workspace/tomcat/webapps/host-manager] の Web アプリケーションの配備は [9] ms で完了しました。
+14-Jul-2022 00:03:25.233 情報 [main] org.apache.coyote.AbstractProtocol.start プロトコルハンドラー ["http-nio-8080"] を開始しました。
+14-Jul-2022 00:03:25.238 情報 [main] org.apache.catalina.startup.Catalina.start サーバーの起動 [292]ms
+14-Jul-2022 00:03:31.663 情報 [main] org.apache.catalina.core.StandardServer.await 有効なシャットダウンコマンドがシャットダウンポート経由で受信されました。 サーバーインスタンスを停止します。
+14-Jul-2022 00:03:31.664 情報 [main] org.apache.coyote.AbstractProtocol.pause ProtocolHandler ["http-nio-8080"] を一時停止します。
+14-Jul-2022 00:03:32.679 情報 [main] org.apache.catalina.core.StandardService.stopInternal サービス [Catalina] を停止します
+14-Jul-2022 00:03:32.700 情報 [main] org.apache.coyote.AbstractProtocol.stop ProtocolHandler ["http-nio-8080"]の停止中
+14-Jul-2022 00:03:32.712 情報 [main] org.apache.coyote.AbstractProtocol.destroy ProtocolHandler ["http-nio-8080"] を破棄します。
