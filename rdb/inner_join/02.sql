@@ -1,10 +1,10 @@
 -- 部署IDが01の部署の従業員を取得（INNER JOINなし）
-SELECT divisions.name, employees.name 
-	FROM divisions, employees 
-	WHERE divisions.id = employees.division_id AND divisions.id = '01';
+SELECT d.name, e.name 
+	FROM divisions d, employees e 
+	WHERE d.id = e.division_id AND d.id = '01';
 
 -- 部署IDが01の部署の従業員を取得（INNER JOINあり）
-SELECT divisions.name, employees.name 
-	FROM divisions 
-		INNER JOIN employees ON divisions.id = employees.division_id
-	WHERE divisions.id = '01';
+SELECT d.name, e.name 
+	FROM divisions d
+		INNER JOIN employees e ON d.id = e.division_id
+	WHERE d.id = '01';
