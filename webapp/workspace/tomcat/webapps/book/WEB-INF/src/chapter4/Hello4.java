@@ -3,6 +3,7 @@ package chapter4;
 import java.io.IOException;
 import java.rmi.ServerException;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +14,7 @@ import tool.Page;
 public class Hello4 extends HttpServlet {
     public void doGet(
         HttpServletRequest request, HttpServletResponse response
-    ) throws ServerException, IOException {
+    ) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         var out = response.getWriter();
 
