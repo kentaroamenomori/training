@@ -1,6 +1,9 @@
-SELECT divisions.name, certificates.name, COUNT(employees.name)
-	FROM divisions
-		INNER JOIN employees ON divisions.id = employees.division_id
-		INNER JOIN employee_certificates ON employees.id = employee_certificates.employee_id
-		INNER JOIN certificates ON employee_certificates.certificate_id = certificates.id
-		GROUP BY divisions.name, certificates.name;
+SELECT d.name, c.name, COUNT(e.id)
+	FROM divisions d
+		INNER JOIN employees e 
+			ON d.id = e.division_id
+		INNER JOIN employee_certificates ec 
+			ON e.id = ec.employee_id
+		INNER JOIN certifications c
+			ON ec.certificate_id = c.id
+		GROUP BY d.id, c.id;
