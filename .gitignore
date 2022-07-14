@@ -2,5 +2,7 @@
 .vscode/
 bin/
 lib/
+webapp/workspace/tomcat/logs/
+webapp/workspace/tomcat/temp/
 .class
 

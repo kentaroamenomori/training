@@ -1,7 +1,6 @@
-package chapter4;
+package chapter5;
 
 import java.io.IOException;
-import java.rmi.ServerException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,21 +9,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import tool.Page;
 
-@WebServlet(urlPatterns = {"/chapter4/hello5"})
-public class Hello5 extends HttpServlet {
+@WebServlet(urlPatterns = {"/chapter5/greeting2"})
+public class Greeting2 extends HttpServlet {
     
-    public void doGet(
+    public void doPost(
         HttpServletRequest request, HttpServletResponse response
     ) throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
-        var out = response.getWriter();
+        var out =response.getWriter();
+
+        request.setCharacterEncoding("UTF-8");
+        var user = request.getParameter("user");
 
         Page.header(out);
-
-        out.println("<p>Congratulations!</p>");
-        out.println("<p>おめでとう！</p>");
-        out.println("<p>" + new java.util.Date() + "</p>");
-
+        out.println("<p>こんにちは、" + user + "さん</p>");
         Page.footer(out);
     }
+
 }
