@@ -1,5 +1,5 @@
 -- 資格テーブルを作成
-CREATE TABLE certificates(id TEXT PRIMARY KEY, name TEXT NOT NULL UNIQUE);
+CREATE TABLE certifications(id TEXT PRIMARY KEY, name TEXT NOT NULL UNIQUE);
 
 -- 従業員ID・資格ID・資格取得日を記載したテーブルを作成
 CREATE TABLE employee_certificates(
