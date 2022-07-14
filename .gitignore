@@ -1,8 +1,8 @@
-.DS_Store
-.vscode/
+*.DS_Store
+*.vscode/
 bin/
 lib/
 webapp/workspace/tomcat/logs/
 webapp/workspace/tomcat/temp/
-.class
+*.class
 
