@@ -1,12 +1,13 @@
 -- 部署名と、それぞれの部署で最後に入社した従業員の名前・入社日を取得する
-SELECT divisions.name, employees.name, employees.date_joined
-    FROM divisions
-        INNER JOIN employees ON divisions.id = employees.division_id
+SELECT d.name, e.name, e.joined_at
+    FROM divisions d
+        INNER JOIN employees e
+		ON d.id = e.division_id
         INNER JOIN 
             (
-                SELECT MAX(date_joined) AS date_joined, division_id 
-                FROM employees 
+                SELECT MAX(joined_at) AS joined_at, division_id 
+                FROM employees e
                 GROUP BY division_id
-            ) AS employee_tenures 
-            ON divisions.id = employee_tenures.division_id
-    WHERE employee_tenures.date_joined = employees.date_joined;
+            ) AS tenures 
+            ON d.id = tenures.division_id
+    WHERE tenures.joined_at = e.joined_at;
