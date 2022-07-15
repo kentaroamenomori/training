@@ -1,7 +1,6 @@
 package chapter10;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +15,5 @@ public class FilterSample extends HttpServlet {
         HttpServletRequest request, HttpServletResponse response
     ) throws ServletException, IOException {
         System.out.println("サーブレットの処理");
-        var out = response.getWriter();
-        out.println("フィルターのサンプル");
     }
 }
