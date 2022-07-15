@@ -38,8 +38,12 @@ public class InspectClass implements ModelInterface {
 
             // fields
             for (var field : fields) {
-                fieldResult += createFieldString(clazz, instance, field);
-                fieldResult += "\n";
+                try {
+                    fieldResult += createFieldString(clazz, instance, field);
+                    fieldResult += "\n";
+                } catch (IllegalAccessException e) {
+                    return "failed to access the field";
+                }
             }
 
             // methods
@@ -61,18 +65,18 @@ public class InspectClass implements ModelInterface {
      * @param instance フィールド初期値の取得にクラスのインスタンスが必要となる
      * @param field
      * @return クラス名: フィールド = 初期値
+     * @throws IllegalAccessException フィールドへのアクセスに失敗した場合
      */
-    private String createFieldString(Class<?> clazz, Object instance, Field field) {
+    private String createFieldString(Class<?> clazz, Object instance, Field field) throws IllegalAccessException {
+
+        field.setAccessible(true);
+
         var result = "";
         result += clazz.getName() + ": " + field.toString();
 
-        try {
-            field.setAccessible(true);
-
-            // fieldの初期値を取得する
-            var value = " = " + field.get(instance).toString();
-            result += value;
-        } catch (IllegalAccessException e) {}
+        // fieldの初期値を取得する
+        var value = " = " + field.get(instance).toString();
+        result += value;
 
         return result;
     }
