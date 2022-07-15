@@ -72,9 +72,7 @@ public class InspectClass implements ModelInterface {
             // fieldの初期値を取得する
             var value = " = " + field.get(instance).toString();
             result += value;
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        } catch (IllegalAccessException e) {}
 
         return result;
     }
