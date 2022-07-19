@@ -20,6 +20,8 @@ public class MySessionFilter implements Filter {
             throws IOException, ServletException {
 
         var newRequest = new MyHttpServletRequest((HttpServletRequest) request);
+
+        // セッションIDを格納したクッキーをresponseに追加する
         var cookie = newRequest.getCookie();
         ((HttpServletResponse) response).addCookie(cookie);
 

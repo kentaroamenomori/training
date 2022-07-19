@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
+import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
@@ -35,7 +36,7 @@ public class MyHttpServletRequest implements HttpServletRequest {
         setCookie();
     }
 
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
     private Cookie cookie; // sessionIDを格納するクッキー
     private final static String COOKIE_KEY = "sessionId";
 
@@ -58,7 +59,7 @@ public class MyHttpServletRequest implements HttpServletRequest {
         }
 
         // リクエストにもクッキーがない場合は新しいものを生成する
-        cookie = new Cookie(COOKIE_KEY, UUID.randomUUID().toString());
+        cookie = new Cookie(COOKIE_KEY, new SecureRandom().toString());
     }
     
     @Override

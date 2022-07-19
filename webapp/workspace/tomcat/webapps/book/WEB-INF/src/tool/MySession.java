@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpSessionContext;
 public class MySession implements HttpSession {
 
     // セッションとそのIDのペアを保存するマップ
-    private static Map<String, MySession> sessionIdMap = new HashMap<>();
+    private final static Map<String, MySession> SESSION_MAP = new HashMap<>();
 
     /**
      * 指定したIDを持つセッションを返す
@@ -19,19 +19,19 @@ public class MySession implements HttpSession {
      * @return MySession
      */
     public static MySession getSessionById(String id) {
-        return sessionIdMap.get(id);
+        return SESSION_MAP.get(id);
     }
 
     public MySession(String id) {
         sessionId = id;
         // インスタンス生成と同時にマップにIDとインスタンスを保存する
-        sessionIdMap.put(id, this);
+        SESSION_MAP.put(id, this);
     }
 
-    private String sessionId;
+    private final String sessionId;
 
     // セッションの中身
-    private Map<String, Object> values = new HashMap<>();
+    private final Map<String, Object> values = new HashMap<>();
 
     @Override
     public Object getAttribute(String name) {
