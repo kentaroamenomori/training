@@ -1,6 +1,7 @@
 package tool;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 
 import jakarta.servlet.ServletContext;
@@ -9,19 +10,36 @@ import jakarta.servlet.http.HttpSessionContext;
 
 public class MySession implements HttpSession {
 
-    private String id = null;
+    // セッションとそのIDのペアを保存するマップ
+    private static Map<String, MySession> sessionIdMap = new HashMap<>();
 
-    private Map<String, Object> values;
+    /**
+     * 指定したIDを持つセッションを返す
+     * @param id
+     * @return MySession
+     */
+    public static MySession getSessionById(String id) {
+        return sessionIdMap.get(id);
+    }
+
+    public MySession(String id) {
+        sessionId = id;
+        // インスタンス生成と同時にマップにIDとインスタンスを保存する
+        sessionIdMap.put(id, this);
+    }
+
+    private String sessionId;
+
+    // セッションの中身
+    private Map<String, Object> values = new HashMap<>();
 
     @Override
     public Object getAttribute(String name) {
-        if (id == null) return null;
         return values.get(name);
     }
 
     @Override
     public void setAttribute(String name, Object value) {
-        System.out.println(value);
         values.put(name, value);
     }
 
@@ -35,9 +53,10 @@ public class MySession implements HttpSession {
         values.clear();
     }
 
-    // private String getCookieValue() {
-        
-    // }
+    @Override
+    public String getId() {
+        return sessionId;
+    }
 
     // 以下実装不要 **************************************************
 
@@ -45,12 +64,6 @@ public class MySession implements HttpSession {
     public long getCreationTime() {
         // TODO Auto-generated method stub
         return 0;
-    }
-
-    @Override
-    public String getId() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override

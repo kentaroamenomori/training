@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.DispatcherType;
@@ -31,13 +32,46 @@ public class MyHttpServletRequest implements HttpServletRequest {
 
     public MyHttpServletRequest(HttpServletRequest request) {
         this.request = request;
+        setCookie();
     }
 
     private HttpServletRequest request;
+    private Cookie cookie; // sessionIDを格納するクッキー
+    private final static String COOKIE_KEY = "sessionId";
+
+    public Cookie getCookie() {
+        return cookie;
+    }
+
+    /**
+     * リクエストからsessionIdを示すクッキーをフィールドにセットする
+     */
+    private void setCookie() {
+        var cookies = request.getCookies();
+        if (cookies != null) {
+            for (var reqCookie : cookies) {
+                if (reqCookie.getName().equals(COOKIE_KEY)) {
+                    cookie = reqCookie;
+                    return;
+                }
+            }
+        }
+
+        // リクエストにもクッキーがない場合は新しいものを生成する
+        cookie = new Cookie(COOKIE_KEY, UUID.randomUUID().toString());
+    }
     
     @Override
     public HttpSession getSession() {
-        return new MySessionProxy(); //自作のsessionのproxyを返す
+        var id = cookie.getValue();
+
+        var session = MySession.getSessionById(id);
+
+        if (session == null) {
+            session = new MySession(id);
+        }
+
+        return session;
     }
 
     @Override
