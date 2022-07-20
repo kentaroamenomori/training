@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.DispatcherType;
@@ -41,10 +40,14 @@ public class MyHttpServletRequest implements HttpServletRequest {
     
     @Override
     public MySession getSession() {
+        // requestからセッションIDを取得(nullの場合は新しく生成する)
         var id = request.getRequestedSessionId();
-        if (id == null) id = UUID.randomUUID().toString();
+        if (id == null) id = new SecureRandom().toString();
+
+        // responseのクッキーにセッションIDを設定
         response.addCookie(new Cookie("JSESSIONID", id));
 
+        // 該当するIDを持つsessionを取得（なかった場合は新しく生成する）
         var session = MySession.getSessionById(id);
         if (session == null) session = new MySession(id);
         
