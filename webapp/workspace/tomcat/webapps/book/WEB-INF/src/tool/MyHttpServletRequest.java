@@ -31,25 +31,23 @@ import jakarta.servlet.http.Part;
  */
 public class MyHttpServletRequest implements HttpServletRequest {
 
-    public MyHttpServletRequest(HttpServletRequest request) {
+    public MyHttpServletRequest(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
+        this.response = response;
     }
 
     private final HttpServletRequest request;
+    private final HttpServletResponse response;
     
     @Override
-    public HttpSession getSession() {
-        // requestのIDを取得（ない場合は新しいものを生成する）
+    public MySession getSession() {
         var id = request.getRequestedSessionId();
-        if (id == null) id = new SecureRandom().toString();
+        if (id == null) id = UUID.randomUUID().toString();
+        response.addCookie(new Cookie("JSESSIONID", id));
 
-        // 自作セッションのマップから該当するセッションを取得
-        // 該当するものがなかった場合は新しく生成する
         var session = MySession.getSessionById(id);
-        if (session == null) {
-            session = new MySession(id);
-        }
-
+        if (session == null) session = new MySession(id);
+        
         return session;
     }
 
