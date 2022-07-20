@@ -33,41 +33,19 @@ public class MyHttpServletRequest implements HttpServletRequest {
 
     public MyHttpServletRequest(HttpServletRequest request) {
         this.request = request;
-        setCookie();
     }
 
     private final HttpServletRequest request;
-    private Cookie cookie; // sessionIDを格納するクッキー
-    private final static String COOKIE_KEY = "sessionId";
-
-    public Cookie getCookie() {
-        return cookie;
-    }
-
-    /**
-     * リクエストからsessionIdを示すクッキーをフィールドにセットする
-     */
-    private void setCookie() {
-        var cookies = request.getCookies();
-        if (cookies != null) {
-            for (var reqCookie : cookies) {
-                if (reqCookie.getName().equals(COOKIE_KEY)) {
-                    cookie = reqCookie;
-                    return;
-                }
-            }
-        }
-
-        // リクエストにもクッキーがない場合は新しいものを生成する
-        cookie = new Cookie(COOKIE_KEY, new SecureRandom().toString());
-    }
     
     @Override
     public HttpSession getSession() {
-        var id = cookie.getValue();
+        // requestのIDを取得（ない場合は新しいものを生成する）
+        var id = request.getRequestedSessionId();
+        if (id == null) id = new SecureRandom().toString();
 
+        // 自作セッションのマップから該当するセッションを取得
+        // 該当するものがなかった場合は新しく生成する
         var session = MySession.getSessionById(id);
-
         if (session == null) {
             session = new MySession(id);
         }
