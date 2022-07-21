@@ -2,7 +2,6 @@ package chapter16;
 
 import java.io.IOException;
 
-import bean.Product;
 import dao.ProductDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,8 +16,6 @@ public class Attribute2 extends HttpServlet {
     protected void doGet(
         HttpServletRequest req, HttpServletResponse resp
     ) throws ServletException, IOException {
-        var out = resp.getWriter();
-
         try {
             var dao = new ProductDAO();
             var list = dao.search("");
