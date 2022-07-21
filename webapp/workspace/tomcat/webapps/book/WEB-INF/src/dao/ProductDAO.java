@@ -28,4 +28,18 @@ public class ProductDAO extends DAO {
 
         return list;
     }
+
+    public int insert(Product product) throws Exception {
+        var con = getConnection();
+        var st = con.prepareStatement(
+            "insert into product(name, price) values(?, ?)"
+        );
+        st.setString(1, product.getName());
+        st.setInt(2, product.getPrice());
+        int line = st.executeUpdate();
+
+        st.close();
+        con.close();
+        return line;
+    }
 }
