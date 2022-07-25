@@ -47,4 +47,10 @@
         <url-pattern>/chapter19/param-servlet</url-pattern>
     </filter-mapping>
 
+    <dependency>
+ <groupId>org.glassfish.web</groupId>
+ <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+ <version>3.0.0</version>
+</dependency>
+
 </web-app>
